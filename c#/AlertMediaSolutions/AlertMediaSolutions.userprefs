@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="ADSyncConsole/ADSyncConsole.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ADSyncConsole/ActiveDirectoryClient.cs">
+    <Files>
+      <File FileName="ADSyncConsole/ActiveDirectoryClient.cs" Line="328" Column="3" />
+      <File FileName="ADSyncConsole/App.config" Line="57" Column="2" />
+      <File FileName="ADSyncConsole/ConsoleClient.cs" Line="10" Column="44" />
+      <File FileName="TestClient/Test.cs" Line="11" Column="1" />
+      <File FileName="ADSyncClient/App.config" Line="3" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
