@@ -80,8 +80,6 @@ The config file has 4 main mappings:
 
 **AMSettings**
 
-     
-
 Configuration fields of AMSettings are
 
 1.  BaseUrl - AlertMedia server URL. It will always be
@@ -108,19 +106,17 @@ Configuration fields of AMSettings are
     GroupMappingType is **FieldValue**. More explanation is given below
     in GroupMapping section option 2.
 
-**ADSettings **
+**ADSettings**
 
 Configuration fields of ADSettings are
 
 1.  LdapUrl - Customer’s internal LDAP Server URL. This should begin
     with LDAP://
-
 2.  Username - LDAP Admin user name that will help in fetching
     all users. (i.e. administrator@domainname.local)
-
 3.  Password - Password of LDAP admin user
 
-**FieldMappings **
+**FieldMappings**
 
 In this section each of the corresponding AlertMedia user fields are
 mapped to an ActiveDirectory user object field.
@@ -132,46 +128,39 @@ For a specific user field in AlertMedia, if there is no corresponding
 ActiveDirectory user field, then let both key & value have the same
 text.
 
-**GroupMappings **
+**GroupMappings**
 
 There are 2 ways AlertMedia Group can be mapped to an ActiveDirectory
 group
 
-*Option 1: Using ActiveDirectory’s OU approach *
+*Option 1: Using ActiveDirectory’s OU approach*
 
-Each row in this section will look as described below -
+Each row in this section will look as described below:
+-  `<add key="{{ alertmedia_group_id~alertmedia_group_name }}" value="{{ active_directory_ou_name }}">`
 
-`<add key=“{{ alertmedia\_group\_id\~alertmedia\_group\_name }}" value=“ {{ active\_directory\_u\_name }}">`
-
-Example: `<add key=“12\~New Group” value=“OU-NewGroup”>`
+Example: `<add key="12~New Group" value="OU-NewGroup">`
 
 In the above example:
 
--   12 is AlertMedia Group ID
+-  12 is AlertMedia Group ID
+-  New Group is AlertMedia group name
+-  OU-NewGroup is ActiveDirectory group name
 
--   New Group is AlertMedia group name
-
--   OU-NewGroup is ActiveDirectory group name
-
-*Option 2: Based on ActiveDirectory user field values *
+*Option 2: Based on ActiveDirectory user field values*
 
 In this approach, values of a specific user field in ActiveDirectory
 determines the actual group the user belongs to in AlertMedia. The AD
-user field name is configured in ADUserFieldForGroupMapping.
+user field name is configured in `ADUserFieldForGroupMapping`.
 
 Each row in this section will look as described below:
 
--   `<add key=“{{ alertmedia\_group\_id\~alertmedia\_group\_name }}" value=“ {{ field\_value }}">`
+- `<add key=“{{ alertmedia_group_id~alertmedia_group_name }}" value=“ {{ field_value }}">`
 
 Example:
-
--   ADUserFieldForGroupMapping value in AMSettings will be “location”
-
+-   ADUserFieldForGroupMapping value in AMSettings will be `location`
 -   Each row in GroupMapping will look as described below:
-
-    -   `<add key=“{{ 12\~Austin Group }}" value=“ {{ austin }}">`
-
-    -   `<add key=“{{ 13\~Seattle Group }}" value=“ {{ seattle }}">`
+    -   `<add key="{{ 12~Austin Group }}" value="{{ austin }}">`
+    -   `<add key="{{ 13~Seattle Group }}" value="{{ seattle }}">`
 
 ***AlertMediaSolutions/ADSyncConsole***
 
