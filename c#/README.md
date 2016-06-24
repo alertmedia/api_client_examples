@@ -164,6 +164,8 @@ Example:
 
 ***AlertMediaSolutions/ADSyncConsole***
 
+*NOTE: The console app should only be used after successful imports using the Client UI.  It will automatically sync and DELETE users without prompting. It is only intended to be used once everything works as a scheduled, unattended process*
+
 This console application can be used to import users from AD to
 AlertMedia once the configuration file is manually created.
 
