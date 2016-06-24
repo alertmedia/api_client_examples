@@ -11,6 +11,7 @@ using alertmedia;
 using alertmedia.activedirectory;
 using System.Configuration;
 using System.Collections;
+using System.IO;
 
 namespace ADSyncClient
 {
@@ -54,7 +55,10 @@ namespace ADSyncClient
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                    {
+                        this.Log(ex.ToString(), w);
+                    }
                     MessageBox.Show("Not able to connect to you Active Directory instance. Please check you internet connection and try again. If problem persists, please contact your internal support team.");
                     this.decremenPage();
                     this.displayPanel();
@@ -100,6 +104,16 @@ namespace ADSyncClient
             {
                 pageCount--;
             }
+        }
+
+        public void Log(string logMessage, TextWriter logWriter)
+        {
+            logWriter.Write("\r\nLog Entry : ");
+            logWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
+                DateTime.Now.ToLongDateString());
+            logWriter.WriteLine("  :");
+            logWriter.WriteLine("  :{0}", logMessage);
+            logWriter.WriteLine("---------------------------------------------------------------------------------------");
         }
 
     }

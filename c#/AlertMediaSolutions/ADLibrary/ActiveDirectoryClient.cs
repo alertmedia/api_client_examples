@@ -234,6 +234,44 @@ namespace alertmedia.activedirectory
                                 }
                                 else if (this.groupMappingType.Equals("OU"))
                                 {
+                                    for (int i = 0; i < this.alertMediaGroups.Count; i++)
+                                    {
+                                        amUserObject[this.alertMediaGroups[i]] = "no";
+                                    }
+                                    string ouNameList = adUserObject.Properties["distinguishedname"][0].ToString();
+                                    bool flag = true;
+                                    while(flag)
+                                    {
+                                        int idx = ouNameList.IndexOf("OU=");
+                                        if(idx == -1)
+                                        {
+                                            flag = false;
+                                        }
+                                        else
+                                        {
+                                            string ouName = "";
+                                            int commaIdx = ouNameList.IndexOf(",", idx);
+                                            if (commaIdx != -1)
+                                            {
+                                                ouName = ouNameList.Substring(idx, (commaIdx-idx));
+                                                ouNameList = ouNameList.Substring(commaIdx+1, (ouNameList.Length-(commaIdx+1)));
+                                            }
+                                            else
+                                            {
+                                                ouName = ouNameList.Substring(idx, (ouNameList.Length-idx));
+                                                ouNameList = "";
+                                            }
+                                            foreach(var amGroup in this.groupMappings.Keys)
+                                            {
+                                                if(this.groupMappings[amGroup].ToString().Equals(ouName))
+                                                {
+                                                    amUserObject[amGroup] = "yes";
+                                                    break;
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
                                 }
                                 activeDirectoryUsers.Add(amUserObject);
                             }
@@ -256,7 +294,7 @@ namespace alertmedia.activedirectory
                 return true;
             }
             DirectoryEntry de = sr.GetDirectoryEntry();
-            if (de.NativeGuid == null) return false;
+            if (de == null || de.NativeGuid == null) return false;
             int flags = (int)de.Properties["userAccountControl"].Value;
             if(flags == 0)
             {

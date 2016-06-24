@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using alertmedia;
 using System.Collections;
+using System.IO;
 
 namespace ADSyncClient
 {
@@ -149,6 +150,11 @@ namespace ADSyncClient
             }
             catch(Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    parentForm.Log(ex.ToString(), w);
+                }
+
                 MessageBox.Show("Not able to connect to AlertMedia servers. Please check you internet connection and try again. If problem persists, please get in touch with support.");
                 Cursor.Current = Cursors.Default;
                 return;
@@ -162,12 +168,16 @@ namespace ADSyncClient
             }
             catch(Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    parentForm.Log(ex.ToString(), w);
+                }
                 MessageBox.Show("Not able to connect to AlertMedia servers. Please check you internet connection and try again. If problem persists, please get in touch with support.");
                 Cursor.Current = Cursors.Default;
                 return;
             }
+            /*             
             groupSection.Settings.Clear();
-            /*
             Group[] groups = (Group[])returnObject["data"];
             for (int i = 0; i < groups.Length; i++)
             {

@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using System.Web.Script.Serialization;
 using System.Collections;
+using System.IO;
 
 namespace ADSyncClient
 {
@@ -136,6 +137,10 @@ namespace ADSyncClient
             }
             catch (Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    parentForm.Log(ex.ToString(), w);
+                }
                 MessageBox.Show("Not able to connect to you Active Directory instance. Please check you internet connection and try again. If problem persists, please contact your internal support team.");
                 Cursor.Current = Cursors.Default;
                 return;
@@ -152,11 +157,16 @@ namespace ADSyncClient
             {
                 Cursor.Current = Cursors.WaitCursor;
                 client.deleteUsersFromAlertMedia(deletedUserIdList);
-                resultsPanel.Text = "All users in the preview list above have been deleted";
+                resultsPanel.Text = "All " + deletedUserIdList.Count + " users listed above in the preview list have been deleted";
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    parentForm.Log(ex.ToString(), w);
+                }
+
                 MessageBox.Show("Not able to connect to AlertMedia servers. Please check you internet connection and try again. If problem persists, please get in touch with support.");
                 Cursor.Current = Cursors.Default;
                 return;

@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using System.Web.Script.Serialization;
 using System.Collections;
+using System.IO;
 
 namespace ADSyncClient
 {
@@ -209,7 +210,11 @@ namespace ADSyncClient
             catch (Exception ex)
             {
                 tablePanel.DocumentText = "";
-                MessageBox.Show(ex.ToString());
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    parentForm.Log(ex.ToString(), w);
+                }
+
                 MessageBox.Show("Not able to connect to you Active Directory instance. Please check you internet connection and try again. If problem persists, please contact your internal support team.");
                 Cursor.Current = Cursors.Default;
                 return;
@@ -275,6 +280,10 @@ namespace ADSyncClient
             }
             catch (Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    parentForm.Log(ex.ToString(), w);
+                }
                 MessageBox.Show("Not able to connect to AlertMedia servers. Please check you internet connection and try again. If problem persists, please get in touch with support.");
                 Cursor.Current = Cursors.Default;
                 return;
