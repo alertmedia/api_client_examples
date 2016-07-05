@@ -107,7 +107,7 @@ namespace alertmedia
         {
             try
             {
-                string missingUrl = "users_missing/?customer=" + customer;
+                string missingUrl = "users_missing/?customer=" + customer + "&include_admins=false";
                 Hashtable args = new Hashtable();
                 args["users"] = retainedUserList;
                 return this.performPost(missingUrl, args);
