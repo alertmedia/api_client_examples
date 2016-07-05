@@ -212,7 +212,7 @@ namespace ADSyncClient
                 tablePanel.DocumentText = "";
                 using (StreamWriter w = File.AppendText("adsynclog.txt"))
                 {
-                    parentForm.Log(ex.ToString(), w);
+                    Utils.Log(ex.ToString(), w);
                 }
 
                 MessageBox.Show("Not able to connect to you Active Directory instance. Please check you internet connection and try again. If problem persists, please contact your internal support team.");
@@ -282,7 +282,7 @@ namespace ADSyncClient
             {
                 using (StreamWriter w = File.AppendText("adsynclog.txt"))
                 {
-                    parentForm.Log(ex.ToString(), w);
+                    Utils.Log(ex.ToString(), w);
                 }
                 MessageBox.Show("Not able to connect to AlertMedia servers. Please check you internet connection and try again. If problem persists, please get in touch with support.");
                 Cursor.Current = Cursors.Default;

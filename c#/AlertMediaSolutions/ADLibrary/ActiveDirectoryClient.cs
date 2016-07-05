@@ -143,48 +143,70 @@ namespace alertmedia.activedirectory
 
         public SortedDictionary<String, String> fetchUserFields(string excludeDisableAccounts)
         {
-            SortedDictionary<String, String> userObject = new SortedDictionary<String, String>();
-            SearchResultCollection resultCol = this.userSearcher.FindAll();
-            if (resultCol != null && resultCol.Count > 1)
+            try
             {
-                for (int i = 0; i < resultCol.Count; i++)
+                SortedDictionary<String, String> userObject = new SortedDictionary<String, String>();
+                SearchResultCollection resultCol = this.userSearcher.FindAll();
+                if (resultCol != null && resultCol.Count > 1)
                 {
-                    SearchResult adUserObject = resultCol[i];
-                    if (isUserActive(adUserObject, excludeDisableAccounts))
+                    for (int i = 0; i < resultCol.Count; i++)
                     {
-                        if (adUserObject.Properties.Contains(this.adEmailField) ||
-                            adUserObject.Properties.Contains(this.adMobileNumberField))
+                        SearchResult adUserObject = resultCol[i];
+                        if (isUserActive(adUserObject, excludeDisableAccounts))
                         {
-                            foreach (string propName in adUserObject.Properties.PropertyNames)
+                            if (adUserObject.Properties.Contains(this.adEmailField) ||
+                                adUserObject.Properties.Contains(this.adMobileNumberField))
                             {
-                                userObject.Add(propName, adUserObject.Properties[propName][0].ToString());
+                                foreach (string propName in adUserObject.Properties.PropertyNames)
+                                {
+                                    userObject.Add(propName, adUserObject.Properties[propName][0].ToString());
+                                }
+                                return userObject;
                             }
-                            return userObject;
                         }
                     }
                 }
+                return userObject;
             }
-            return userObject;
+            catch(Exception ex)
+            {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    Utils.Log(ex.ToString(), w);                   
+                }
+                throw ex;
+            }
         }
 
         public ArrayList getActiveDirectoryUserGroups()
         {
-            ArrayList groupList = new ArrayList();
-            if (this.groupSearcher == null)
+            try
             {
-                this.connectToActiveDirectory();
-            }
-            SearchResultCollection results = this.groupSearcher.FindAll();
-            if (results.Count > 0)
-            {
-                foreach (SearchResult resEn in results)
+                ArrayList groupList = new ArrayList();
+                if (this.groupSearcher == null)
                 {
-                    string OUName = resEn.GetDirectoryEntry().Name;
-                    groupList.Add(OUName);
+                    this.connectToActiveDirectory();
                 }
+                SearchResultCollection results = this.groupSearcher.FindAll();
+                if (results.Count > 0)
+                {
+                    foreach (SearchResult resEn in results)
+                    {
+                        string OUName = resEn.GetDirectoryEntry().Name;
+                        groupList.Add(OUName);
+                    }
+                }
+                groupList.Sort();
+                return groupList;
             }
-            groupList.Sort();
-            return groupList;
+            catch(Exception ex)
+            {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    Utils.Log(ex.ToString(), w);
+                }
+                throw ex;
+            }
         }
 
 
@@ -200,6 +222,7 @@ namespace alertmedia.activedirectory
 
         public void getUserDetailsFromActiveDirectory(string filterQuery, string excludeDisableAccounts)
         {
+            Hashtable amUserObject = null;
             try
             {
                 if(!filterQuery.Equals(""))
@@ -211,13 +234,14 @@ namespace alertmedia.activedirectory
                 {
                     for (int counter = 0; counter < resultCol.Count; counter++)
                     {
+                        amUserObject = null;
                         SearchResult adUserObject = resultCol[counter];
                         if (isUserActive(adUserObject, excludeDisableAccounts))
                         {
                             if (adUserObject.Properties.Contains(this.adEmailField) ||
                                 adUserObject.Properties.Contains(this.adMobileNumberField))
                             {
-                                Hashtable amUserObject = this.copyFromADUserObject2AMUserObject(adUserObject);
+                                amUserObject = this.copyFromADUserObject2AMUserObject(adUserObject);
                                 if (this.groupMappingType.Equals("FieldValue"))
                                 {
                                     for (int i = 0; i < this.alertMediaGroups.Count; i++)
@@ -281,8 +305,14 @@ namespace alertmedia.activedirectory
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(" ***** Error while fetching new users from AD ***** ");
-                //Console.WriteLine(ex);
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    Utils.Log(ex.ToString(), w);
+                    if(amUserObject != null)
+                    {
+                        Utils.Log(amUserObject["email"].ToString(), w);
+                    }                    
+                }
                 throw ex;
             }
         }
@@ -362,8 +392,10 @@ namespace alertmedia.activedirectory
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(" ***** Error while connecting to AD *****");
-                //Console.Error.WriteLine(ex);
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    Utils.Log(ex.ToString(), w);                    
+                }
                 throw ex;
             }
         }
@@ -636,6 +668,10 @@ namespace alertmedia.activedirectory
             }
             catch (Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    Utils.Log(ex.ToString(), w);                    
+                }
                 throw ex;
             }
         }
@@ -651,6 +687,10 @@ namespace alertmedia.activedirectory
             }
             catch (Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    Utils.Log(ex.ToString(), w);                   
+                }
                 throw ex;
             }
         }
@@ -745,6 +785,10 @@ namespace alertmedia.activedirectory
             }
             catch(Exception ex)
             {
+                using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                {
+                    Utils.Log(ex.ToString(), w);                 
+                }
                 throw ex;
             }
 
@@ -755,7 +799,19 @@ namespace alertmedia.activedirectory
         {
             for(int i = 0; i < userIdList.Count; i++)
             {
-                AlertMediaClient.User.delete(userIdList[i].ToString());
+                try
+                {
+                    AlertMediaClient.User.delete(userIdList[i].ToString());
+                }
+                catch(Exception ex)
+                {
+                    using (StreamWriter w = File.AppendText("adsynclog.txt"))
+                    {
+                        Utils.Log(ex.ToString(), w);
+                        Utils.Log(userIdList[i].ToString(), w);
+                    }
+                }
+                
             }
         }
 

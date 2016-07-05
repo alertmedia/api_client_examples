@@ -11,6 +11,7 @@ using System.Configuration;
 using alertmedia;
 using System.Collections;
 using System.IO;
+using alertmedia.activedirectory;
 
 namespace ADSyncClient
 {
@@ -152,7 +153,7 @@ namespace ADSyncClient
             {
                 using (StreamWriter w = File.AppendText("adsynclog.txt"))
                 {
-                    parentForm.Log(ex.ToString(), w);
+                    alertmedia.activedirectory.Utils.Log(ex.ToString(), w);
                 }
 
                 MessageBox.Show("Not able to connect to AlertMedia servers. Please check you internet connection and try again. If problem persists, please get in touch with support.");
@@ -170,7 +171,7 @@ namespace ADSyncClient
             {
                 using (StreamWriter w = File.AppendText("adsynclog.txt"))
                 {
-                    parentForm.Log(ex.ToString(), w);
+                    alertmedia.activedirectory.Utils.Log(ex.ToString(), w);
                 }
                 MessageBox.Show("Not able to connect to AlertMedia servers. Please check you internet connection and try again. If problem persists, please get in touch with support.");
                 Cursor.Current = Cursors.Default;
