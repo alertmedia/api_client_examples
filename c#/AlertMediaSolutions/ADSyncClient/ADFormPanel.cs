@@ -177,19 +177,42 @@ namespace ADSyncClient
                 Cursor.Current = Cursors.Default;
                 return;
             }
-            /*             
-            groupSection.Settings.Clear();
             Group[] groups = (Group[])returnObject["data"];
+            Dictionary<string, string> existingGroupValues = new Dictionary<string, string>();
+            for(int i=0;i<groups.Length;i++)
+            {
+                string groupName = groups[i].id + "~" + groups[i].name;
+                if(groupSection.Settings.AllKeys.Contains(groupName))
+                {
+                    existingGroupValues.Add(
+                        groupName,
+                        groupSection.Settings[groupName].Value
+                        );
+                }
+            }             
+            foreach (var tKey in groupSection.Settings.AllKeys)
+            {
+                groupSection.Settings.Remove(tKey);
+            }       
             for (int i = 0; i < groups.Length; i++)
             {
                 if (!(groups[i].name.Equals("Everyone") || groups[i].name.Equals("Admins")))
                 {
                     string groupName = groups[i].id + "~" + groups[i].name;
-                    groupSection.Settings.Add(new KeyValueConfigurationElement(groupName, ""));                    
+                    if (existingGroupValues.Keys.Contains(groupName))
+                    {
+                        groupSection.Settings.Add(
+                            new KeyValueConfigurationElement(
+                                groupName, existingGroupValues[groupName])
+                                );
+                    }
+                    else
+                    {
+                        groupSection.Settings.Add(new KeyValueConfigurationElement(groupName, ""));
+                    }
                 }
             }
-            config.Save(ConfigurationSaveMode.Minimal);
-            */
+            
             config.Save(ConfigurationSaveMode.Minimal);
             parentForm.incrementPage();
             parentForm.displayPanel();

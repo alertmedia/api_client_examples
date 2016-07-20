@@ -66,6 +66,15 @@ namespace ADSyncClient
             }
             else if (pageCount == 2)
             {
+                GroupMappingPanel panel = new GroupMappingPanel(config);
+                panel.parentForm = this;
+                panel.Width = 740;
+                panel.Height = 440;
+                panel.AutoScroll = true;
+                bodyPanel.Controls.Add(panel);
+            }
+            else if (pageCount == 3)
+            {
                 SyncUsersPanel panel = new SyncUsersPanel(config);
                 panel.parentForm = this;
                 panel.Width = 740;
@@ -73,7 +82,7 @@ namespace ADSyncClient
                 panel.AutoScroll = true;
                 bodyPanel.Controls.Add(panel);
             }            
-            else if (pageCount == 3)
+            else if (pageCount == 4)
             {
                 DeleteUserPanel panel = new DeleteUserPanel(config);
                 panel.parentForm = this;

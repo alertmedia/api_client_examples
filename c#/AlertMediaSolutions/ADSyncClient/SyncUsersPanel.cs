@@ -20,7 +20,7 @@ namespace ADSyncClient
     {
         public AMForm parentForm = null;
         private Configuration config = null;
-        private Button prevButton, previewButton, syncButton, nextButton = null;
+        private Button prevButton, previewButton, downloadButton, syncButton, nextButton = null;
         private WebBrowser tablePanel = null;
         private TextBox resultsPanel = null;
         private TextBox filterField = null;
@@ -86,26 +86,34 @@ namespace ADSyncClient
             prevButton = new Button();
             prevButton.Text = "Back";
             prevButton.Click += new System.EventHandler(this.prevButton_Click);
-            prevButton.Location = new Point(125, 70);
+            prevButton.Location = new Point(50, 70);
             this.Controls.Add(prevButton);
 
             previewButton = new Button();
             previewButton.Text = "List Users";
             previewButton.Click += new System.EventHandler(this.previewButton_Click);
-            previewButton.Location = new Point(275, 70);
+            previewButton.Location = new Point(200, 70);
             this.Controls.Add(previewButton);
+
+            downloadButton = new Button();
+            downloadButton.Text = "Generate CSV file";
+            downloadButton.AutoSize = true;
+            downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+            downloadButton.Location = new Point(350, 70);
+            this.Controls.Add(downloadButton);
+            downloadButton.Enabled = false;
 
             syncButton = new Button();
             syncButton.Text = "Sync Users";
             syncButton.Click += new System.EventHandler(this.syncUsersButton_Click);
-            syncButton.Location = new Point(425, 70);
+            syncButton.Location = new Point(500, 70);
             this.Controls.Add(syncButton);
             syncButton.Enabled = false;
 
             nextButton = new Button();
             nextButton.Text = "Next";
             nextButton.Click += new System.EventHandler(this.nextButton_Click);
-            nextButton.Location = new Point(575, 70);
+            nextButton.Location = new Point(650, 70);
             this.Controls.Add(nextButton);
             nextButton.Enabled = false;
 
@@ -157,6 +165,7 @@ namespace ADSyncClient
             }
             config.Save(ConfigurationSaveMode.Minimal);
             syncButton.Enabled = false;
+            downloadButton.Enabled = false;
             resultsPanel.Text = "Results of syncing users from Active Directory to AlertMedia will be displayed here";
             this.Controls.Remove(tablePanel);
             this.Controls.Add(tablePanel);
@@ -205,6 +214,7 @@ namespace ADSyncClient
 
                 importCSVData = dataStr.ToString();
                 syncButton.Enabled = true;
+                downloadButton.Enabled = true;
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -219,6 +229,12 @@ namespace ADSyncClient
                 Cursor.Current = Cursors.Default;
                 return;
             }
+        }
+
+        private void downloadButton_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText("./activedirectory_user_details.csv", importCSVData);
+            MessageBox.Show("CSV file with name activedirectory_user_details.csv has been created in current application folder");
         }
 
         private void syncUsersButton_Click(object sender, EventArgs e)

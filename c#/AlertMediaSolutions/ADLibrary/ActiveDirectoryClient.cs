@@ -86,7 +86,7 @@ namespace alertmedia.activedirectory
         private ArrayList activeDirectoryUsers;
         private ArrayList alertMediaGroups;
         private Hashtable groupMappings; //  AlertMedia groups mapped to Active Directory groups
-        private Hashtable userFieldMappings; // Alert Media user fields to Active Directory user fields
+        public Hashtable userFieldMappings; // Alert Media user fields to Active Directory user fields
 
         public Configuration config = null;
 
@@ -131,7 +131,7 @@ namespace alertmedia.activedirectory
 
             foreach (var key in fieldMappingsSection.Settings.AllKeys)
             {
-                this.userFieldMappings.Add(key, fieldMappingsSection.Settings[key].Value);
+                this.userFieldMappings.Add(key, fieldMappingsSection.Settings[key].Value);                
             }
 
             if (this.userSearcher == null)
@@ -243,12 +243,19 @@ namespace alertmedia.activedirectory
                             {
                                 amUserObject = this.copyFromADUserObject2AMUserObject(adUserObject);
                                 if (this.groupMappingType.Equals("FieldValue"))
-                                {
+                                {                                    
                                     for (int i = 0; i < this.alertMediaGroups.Count; i++)
                                     {
-                                        if (amUserObject[this.adUserFieldForGroupMapping].Equals(this.groupMappings[this.alertMediaGroups[i]].ToString()))
+                                        if (amUserObject.ContainsKey(this.adUserFieldForGroupMapping) && this.groupMappings[this.alertMediaGroups[i]].ToString() != "")
                                         {
-                                            amUserObject[this.alertMediaGroups[i]] = "yes";
+                                            if (amUserObject[this.adUserFieldForGroupMapping].ToString().Equals(this.groupMappings[this.alertMediaGroups[i]].ToString(), StringComparison.InvariantCultureIgnoreCase))
+                                            {
+                                                amUserObject[this.alertMediaGroups[i]] = "yes";
+                                            }
+                                            else
+                                            {
+                                                amUserObject[this.alertMediaGroups[i]] = "no";
+                                            }
                                         }
                                         else
                                         {
@@ -287,7 +294,7 @@ namespace alertmedia.activedirectory
                                             }
                                             foreach(var amGroup in this.groupMappings.Keys)
                                             {
-                                                if(this.groupMappings[amGroup].ToString().Equals(ouName))
+                                                if(this.groupMappings[amGroup].ToString().Equals(ouName, StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     amUserObject[amGroup] = "yes";
                                                     break;
@@ -296,7 +303,7 @@ namespace alertmedia.activedirectory
                                             
                                         }
                                     }
-                                }
+                                }                                
                                 activeDirectoryUsers.Add(amUserObject);
                             }
                         }
@@ -366,6 +373,7 @@ namespace alertmedia.activedirectory
                         this.username,
                         this.password,
                         AuthenticationTypes.ServerBind));
+                    this.userSearcher.PageSize = 1000;
                     this.userSearcher.Filter = "(&(objectCategory=person)(objectClass=user))";
                 }
                 if (this.groupSearcher == null)
@@ -387,6 +395,7 @@ namespace alertmedia.activedirectory
                         this.username,
                         this.password,
                         AuthenticationTypes.ServerBind));
+                    this.groupSearcher.PageSize = 250;
                     this.groupSearcher.Filter = "(&(objectClass=organizationalUnit))";
                 }
             }
@@ -407,7 +416,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_FIRST_NAME].ToString()))
             {
-                amUserObject.Add(AM_FIRST_NAME, adUserObject.Properties[this.userFieldMappings[AM_FIRST_NAME].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_FIRST_NAME].ToString()][0].ToString().Length > 30)
+                {
+                    amUserObject.Add(AM_FIRST_NAME, adUserObject.Properties[this.userFieldMappings[AM_FIRST_NAME].ToString()][0].ToString().Substring(0, 30));
+                }
+                else
+                {
+                    amUserObject.Add(AM_FIRST_NAME, adUserObject.Properties[this.userFieldMappings[AM_FIRST_NAME].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -416,7 +432,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_LAST_NAME].ToString()))
             {
-                amUserObject.Add(AM_LAST_NAME, adUserObject.Properties[this.userFieldMappings[AM_LAST_NAME].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_LAST_NAME].ToString()][0].ToString().Length > 30)
+                {
+                    amUserObject.Add(AM_LAST_NAME, adUserObject.Properties[this.userFieldMappings[AM_LAST_NAME].ToString()][0].ToString().Substring(0, 30));
+                }
+                else
+                {
+                    amUserObject.Add(AM_LAST_NAME, adUserObject.Properties[this.userFieldMappings[AM_LAST_NAME].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -425,7 +448,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_EMAIL].ToString()))
             {
-                amUserObject.Add(AM_EMAIL, adUserObject.Properties[this.userFieldMappings[AM_EMAIL].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_EMAIL].ToString()][0].ToString().Length > 254)
+                {
+                    amUserObject.Add(AM_EMAIL, adUserObject.Properties[this.userFieldMappings[AM_EMAIL].ToString()][0].ToString().Substring(0, 254));
+                }
+                else
+                {
+                    amUserObject.Add(AM_EMAIL, adUserObject.Properties[this.userFieldMappings[AM_EMAIL].ToString()][0].ToString());
+                }                
             }
             else
             {
@@ -434,7 +464,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_TITLE].ToString()))
             {
-                amUserObject.Add(AM_TITLE, adUserObject.Properties[this.userFieldMappings[AM_TITLE].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_TITLE].ToString()][0].ToString().Length > 60)
+                {
+                    amUserObject.Add(AM_TITLE, adUserObject.Properties[this.userFieldMappings[AM_TITLE].ToString()][0].ToString().Substring(0, 60));
+                }
+                else
+                {
+                    amUserObject.Add(AM_TITLE, adUserObject.Properties[this.userFieldMappings[AM_TITLE].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -443,7 +480,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_EMAIL2].ToString()))
             {
-                amUserObject.Add(AM_EMAIL2, adUserObject.Properties[this.userFieldMappings[AM_EMAIL2].ToString()][0]);
+                if(adUserObject.Properties[this.userFieldMappings[AM_EMAIL2].ToString()][0].ToString().Length > 254)
+                {
+                    amUserObject.Add(AM_EMAIL2, adUserObject.Properties[this.userFieldMappings[AM_EMAIL2].ToString()][0].ToString().Substring(0, 254));
+                }
+                else
+                {
+                    amUserObject.Add(AM_EMAIL2, adUserObject.Properties[this.userFieldMappings[AM_EMAIL2].ToString()][0].ToString());
+                }                
             }
             else
             {
@@ -452,7 +496,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_MOBILE_PHONE].ToString()))
             {
-                amUserObject.Add(AM_MOBILE_PHONE, adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE].ToString()][0].ToString().Length > 20)
+                {
+                    amUserObject.Add(AM_MOBILE_PHONE, adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE].ToString()][0].ToString().Substring(0, 20));
+                }
+                else
+                {
+                    amUserObject.Add(AM_MOBILE_PHONE, adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -461,7 +512,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_MOBILE_PHONE2].ToString()))
             {
-                amUserObject.Add(AM_MOBILE_PHONE2, adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE2].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE2].ToString()][0].ToString().Length > 20)
+                {
+                    amUserObject.Add(AM_MOBILE_PHONE2, adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE2].ToString()][0].ToString().Substring(0, 20));
+                }
+                else
+                {
+                    amUserObject.Add(AM_MOBILE_PHONE2, adUserObject.Properties[this.userFieldMappings[AM_MOBILE_PHONE2].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -470,7 +528,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_HOME_PHONE].ToString()))
             {
-                amUserObject.Add(AM_HOME_PHONE, adUserObject.Properties[this.userFieldMappings[AM_HOME_PHONE].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_HOME_PHONE].ToString()][0].ToString().Length > 20)
+                {
+                    amUserObject.Add(AM_HOME_PHONE, adUserObject.Properties[this.userFieldMappings[AM_HOME_PHONE].ToString()][0].ToString().Substring(0, 20));
+                }
+                else
+                {
+                    amUserObject.Add(AM_HOME_PHONE, adUserObject.Properties[this.userFieldMappings[AM_HOME_PHONE].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -479,7 +544,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_OFFICE_PHONE].ToString()))
             {
-                amUserObject.Add(AM_OFFICE_PHONE, adUserObject.Properties[this.userFieldMappings[AM_OFFICE_PHONE].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_OFFICE_PHONE].ToString()][0].ToString().Length > 20)
+                {
+                    amUserObject.Add(AM_OFFICE_PHONE, adUserObject.Properties[this.userFieldMappings[AM_OFFICE_PHONE].ToString()][0].ToString().Substring(0, 20));
+                }
+                else
+                {
+                    amUserObject.Add(AM_OFFICE_PHONE, adUserObject.Properties[this.userFieldMappings[AM_OFFICE_PHONE].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -488,7 +560,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_ADDRESS].ToString()))
             {
-                amUserObject.Add(AM_ADDRESS, adUserObject.Properties[this.userFieldMappings[AM_ADDRESS].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_ADDRESS].ToString()][0].ToString().Length > 100)
+                {
+                    amUserObject.Add(AM_ADDRESS, adUserObject.Properties[this.userFieldMappings[AM_ADDRESS].ToString()][0].ToString().Substring(0, 100));
+                }
+                else
+                {
+                    amUserObject.Add(AM_ADDRESS, adUserObject.Properties[this.userFieldMappings[AM_ADDRESS].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -497,7 +576,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_ADDRESS2].ToString()))
             {
-                amUserObject.Add(AM_ADDRESS2, adUserObject.Properties[this.userFieldMappings[AM_ADDRESS2].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_ADDRESS2].ToString()][0].ToString().Length > 100)
+                {
+                    amUserObject.Add(AM_ADDRESS2, adUserObject.Properties[this.userFieldMappings[AM_ADDRESS2].ToString()][0].ToString().Substring(0, 100));
+                }
+                else
+                {
+                    amUserObject.Add(AM_ADDRESS2, adUserObject.Properties[this.userFieldMappings[AM_ADDRESS2].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -506,7 +592,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_CITY].ToString()))
             {
-                amUserObject.Add(AM_CITY, adUserObject.Properties[this.userFieldMappings[AM_CITY].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_CITY].ToString()][0].ToString().Length > 50)
+                {
+                    amUserObject.Add(AM_CITY, adUserObject.Properties[this.userFieldMappings[AM_CITY].ToString()][0].ToString().Substring(0, 50));
+                }
+                else
+                {
+                    amUserObject.Add(AM_CITY, adUserObject.Properties[this.userFieldMappings[AM_CITY].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -515,7 +608,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_STATE].ToString()))
             {
-                amUserObject.Add(AM_STATE, adUserObject.Properties[this.userFieldMappings[AM_STATE].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_STATE].ToString()][0].ToString().Length > 20)
+                {
+                    amUserObject.Add(AM_STATE, adUserObject.Properties[this.userFieldMappings[AM_STATE].ToString()][0].ToString().Substring(0, 20));
+                }
+                else
+                {
+                    amUserObject.Add(AM_STATE, adUserObject.Properties[this.userFieldMappings[AM_STATE].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -524,7 +624,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_COUNTRY].ToString()))
             {
-                amUserObject.Add(AM_COUNTRY, adUserObject.Properties[this.userFieldMappings[AM_COUNTRY].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_COUNTRY].ToString()][0].ToString().Length > 2)
+                {
+                    amUserObject.Add(AM_COUNTRY, adUserObject.Properties[this.userFieldMappings[AM_COUNTRY].ToString()][0].ToString().Substring(0, 2));
+                }
+                else
+                {
+                    amUserObject.Add(AM_COUNTRY, adUserObject.Properties[this.userFieldMappings[AM_COUNTRY].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -533,7 +640,14 @@ namespace alertmedia.activedirectory
 
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_ZIPCODE].ToString()))
             {
-                amUserObject.Add(AM_ZIPCODE, adUserObject.Properties[this.userFieldMappings[AM_ZIPCODE].ToString()][0]);
+                if (adUserObject.Properties[this.userFieldMappings[AM_ZIPCODE].ToString()][0].ToString().Length > 15)
+                {
+                    amUserObject.Add(AM_ZIPCODE, adUserObject.Properties[this.userFieldMappings[AM_ZIPCODE].ToString()][0].ToString().Substring(0, 15));
+                }
+                else
+                {
+                    amUserObject.Add(AM_ZIPCODE, adUserObject.Properties[this.userFieldMappings[AM_ZIPCODE].ToString()][0].ToString());
+                }
             }
             else
             {
@@ -574,18 +688,7 @@ namespace alertmedia.activedirectory
             else
             {
                 amUserObject.Add(AM_NOTES, "");
-            }
-            /*
-            if (adUserObject.Properties.Contains(this.userFieldMappings[AM_OUTBOUND_NUMBER].ToString()))
-            {
-                amUserObject.Add(AM_OUTBOUND_NUMBER, adUserObject.Properties[this.userFieldMappings[AM_OUTBOUND_NUMBER].ToString()][0]);
-            }
-            else
-            {
-                amUserObject.Add(AM_OUTBOUND_NUMBER, "");
-            }
-            */
-
+            }           
             if (adUserObject.Properties.Contains(this.userFieldMappings[AM_USER_UNIQUE_KEY].ToString()))
             {
                 amUserObject.Add(AM_USER_UNIQUE_KEY, adUserObject.Properties[this.userFieldMappings[AM_USER_UNIQUE_KEY].ToString()][0]);
