@@ -36,6 +36,11 @@ class Network():
         r = requests.delete(self.get_url(end_point), headers=self.build_header())
         return Result(r)
 
+    def upload(self, end_point, files):
+        headers = {"Authorization": self.auth.authorization}
+        r = requests.post(self.get_url(end_point), headers=headers, files=files)
+        return Result(r)
+
 
 class Result:
 
