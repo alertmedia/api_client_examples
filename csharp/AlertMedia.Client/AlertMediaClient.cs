@@ -15,14 +15,18 @@ namespace AlertMedia.Client
         public readonly Configuration Configuration;
 
         public AlertMediaClient(string clientId = null, string clientSecretKey = null, string server = null) {
+            var username = clientId ?? Environment.GetEnvironmentVariable("AM_CLIENT_ID");
+            if (username == null)
+                throw new ArgumentNullException(nameof(clientId), "You must specify an AlertMedia API clientId and clientSecretKey.");
+
+            var password = clientSecretKey ?? Environment.GetEnvironmentVariable("AM_CLIENT_SECRET_KEY");
+            if (password == null)
+                throw new ArgumentNullException(nameof(clientSecretKey), "You must specify an AlertMedia API clientId and clientSecretKey.");
+
             Configuration = new Configuration {
                 ApiClient = GetApiClient(server),
-                Username = clientId
-                           ?? System.Environment.GetEnvironmentVariable("AM_CLIENT_ID")
-                           ?? throw new ArgumentNullException(nameof(clientId), "You must specify an AlertMedia API clientId and clientSecretKey."),
-                Password = clientSecretKey
-                           ?? System.Environment.GetEnvironmentVariable("AM_CLIENT_SECRET_KEY")
-                           ?? throw new ArgumentNullException(nameof(clientSecretKey), "You must specify an AlertMedia API clientId and clientSecretKey.")
+                Username = username,
+                Password = password,
             };
         }
 

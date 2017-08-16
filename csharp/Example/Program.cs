@@ -14,7 +14,7 @@ namespace AlertMedia.Example
             );
             var customerId = 99;
 
-            foreach (var user in client.Users.List(customerId: customerId)) {
+            foreach (var user in client.Users.List(customer: customerId)) {
                 Console.WriteLine($"{user.FirstName} {user.LastName}");
             }
 

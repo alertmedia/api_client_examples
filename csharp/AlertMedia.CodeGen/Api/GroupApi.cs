@@ -52,9 +52,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>List&lt;Group&gt;</returns>
-        List<Group> List (long? customerId);
+        List<Group> List (long? customer);
 
         /// <summary>
         /// 
@@ -63,9 +63,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>ApiResponse of List&lt;Group&gt;</returns>
-        ApiResponse<List<Group>> ListWithHttpInfo (long? customerId);
+        ApiResponse<List<Group>> ListWithHttpInfo (long? customer);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -96,9 +96,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>Task of List&lt;Group&gt;</returns>
-        System.Threading.Tasks.Task<List<Group>> ListAsync (long? customerId);
+        System.Threading.Tasks.Task<List<Group>> ListAsync (long? customer);
 
         /// <summary>
         /// 
@@ -107,9 +107,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>Task of ApiResponse (List&lt;Group&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Group>>> ListAsyncWithHttpInfo (long? customerId);
+        System.Threading.Tasks.Task<ApiResponse<List<Group>>> ListAsyncWithHttpInfo (long? customer);
         #endregion Asynchronous Operations
     }
 
@@ -372,11 +372,11 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>List&lt;Group&gt;</returns>
-        public List<Group> List (long? customerId)
+        public List<Group> List (long? customer)
         {
-             ApiResponse<List<Group>> localVarResponse = ListWithHttpInfo(customerId);
+             ApiResponse<List<Group>> localVarResponse = ListWithHttpInfo(customer);
              return localVarResponse.Data;
         }
 
@@ -384,13 +384,13 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>ApiResponse of List&lt;Group&gt;</returns>
-        public ApiResponse< List<Group> > ListWithHttpInfo (long? customerId)
+        public ApiResponse< List<Group> > ListWithHttpInfo (long? customer)
         {
-            // verify the required parameter 'customerId' is set
-            if (customerId == null)
-                throw new ApiException(400, "Missing required parameter 'customerId' when calling GroupApi->List");
+            // verify the required parameter 'customer' is set
+            if (customer == null)
+                throw new ApiException(400, "Missing required parameter 'customer' when calling GroupApi->List");
 
             var localVarPath = "/groups";
             var localVarPathParams = new Dictionary<String, String>();
@@ -413,7 +413,7 @@ namespace AlertMedia.CodeGen.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (customerId != null) localVarQueryParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // query parameter
+            if (customer != null) localVarQueryParams.Add("customer", Configuration.ApiClient.ParameterToString(customer)); // query parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -445,11 +445,11 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>Task of List&lt;Group&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Group>> ListAsync (long? customerId)
+        public async System.Threading.Tasks.Task<List<Group>> ListAsync (long? customer)
         {
-             ApiResponse<List<Group>> localVarResponse = await ListAsyncWithHttpInfo(customerId);
+             ApiResponse<List<Group>> localVarResponse = await ListAsyncWithHttpInfo(customer);
              return localVarResponse.Data;
 
         }
@@ -458,13 +458,13 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerId">customer id</param>
+        /// <param name="customer">customer id</param>
         /// <returns>Task of ApiResponse (List&lt;Group&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Group>>> ListAsyncWithHttpInfo (long? customerId)
+        public async System.Threading.Tasks.Task<ApiResponse<List<Group>>> ListAsyncWithHttpInfo (long? customer)
         {
-            // verify the required parameter 'customerId' is set
-            if (customerId == null)
-                throw new ApiException(400, "Missing required parameter 'customerId' when calling GroupApi->List");
+            // verify the required parameter 'customer' is set
+            if (customer == null)
+                throw new ApiException(400, "Missing required parameter 'customer' when calling GroupApi->List");
 
             var localVarPath = "/groups";
             var localVarPathParams = new Dictionary<String, String>();
@@ -487,7 +487,7 @@ namespace AlertMedia.CodeGen.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (customerId != null) localVarQueryParams.Add("customer_id", Configuration.ApiClient.ParameterToString(customerId)); // query parameter
+            if (customer != null) localVarQueryParams.Add("customer", Configuration.ApiClient.ParameterToString(customer)); // query parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
