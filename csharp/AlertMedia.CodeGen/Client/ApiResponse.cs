@@ -9,10 +9,82 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AlertMedia.CodeGen.Client
 {
+    
+    /// <summary>
+    /// ItemRange header pagination
+    /// </summary>
+    public class ItemRange
+    {
+        private const string HeaderName = "Item-Range";
+        private static readonly Lazy<Regex> ItemRangeHeaderRegex = new Lazy<Regex>(() =>
+            new Regex(@"item(?:s|-range) (?:(?<all>\*)|(?<start>\d+)-(?<end>\d+))/(?<total>\d+)$", RegexOptions.Compiled));
+
+        public int Start;
+        public int End;
+        public int Total;
+        public bool IsAllResults;
+
+        public bool IsComplete => IsAllResults || (End+1) >= Total;
+
+        public ItemRange() {}
+
+        public ItemRange(int start, int end) {
+            Start = start;
+            End = end;
+        }
+
+        public static bool TryParse(IDictionary<string, string> headers, out ItemRange range) {
+            range = null;
+            if (headers == null || !headers.ContainsKey(HeaderName))
+                return false;
+            var match = ItemRangeHeaderRegex.Value.Match(headers[HeaderName]);
+            if (!match.Success) 
+                return false;
+            int start, end, total;
+            range = new ItemRange {
+                IsAllResults = match.Groups["all"].Success,
+                Start = int.TryParse(match.Groups["start"].Value, out start) ? start : -1,
+                End = int.TryParse(match.Groups["end"].Value, out end) ? end : -1,
+                Total = int.TryParse(match.Groups["total"].Value, out total) ? total : -1,
+            };
+            return true;
+        }
+        
+        public static ItemRange Parse(IDictionary<string, string> headers) {
+            ItemRange range;
+            if (TryParse(headers, out range))
+                return range;
+            throw new Exception("Could not parse ItemRange from headers") {
+                Data = { { nameof(headers), headers} } 
+            };
+        }
+
+        public ItemRange Increment() {
+            if (IsComplete)
+                throw new IndexOutOfRangeException("ItemRange is complete, cannot increment any further");
+            var pageSize = End - Start;
+            Start = End + 1;
+            End = Math.Min(Start + pageSize, Total);
+            return this;
+        }
+
+        public static ItemRange operator++ (ItemRange item) => item.Increment();
+
+        public string ToHeader() => $"items={Start}-{End}";
+
+        public override string ToString() => new StringBuilder()
+            .AppendFormat("ItemRange<start:{0},end:{1},total:{2}>", Start, End, Total)
+            .ToString();
+    }
+
     /// <summary>
     /// API Response
     /// </summary>
@@ -37,6 +109,11 @@ namespace AlertMedia.CodeGen.Client
         public T Data { get; private set; }
 
         /// <summary>
+        /// Header pagination related information
+        /// </summary>
+        public ItemRange ItemRange { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ApiResponse&lt;T&gt;" /> class.
         /// </summary>
         /// <param name="statusCode">HTTP status code.</param>
@@ -47,8 +124,111 @@ namespace AlertMedia.CodeGen.Client
             this.StatusCode= statusCode;
             this.Headers = headers;
             this.Data = data;
+            ItemRange itemRange;
+            ItemRange.TryParse(headers, out itemRange);
+            ItemRange = itemRange;
+        }
+    }
+    
+    public class PageEnumerator<T> : IEnumerator<T>
+    {
+        private ItemRange _itemRange;
+        private IEnumerator<T> _page;
+        private readonly Func<ItemRange, ApiResponse<ICollection<T>>> _fetch;
+
+        public PageEnumerator(Func<ItemRange, ApiResponse<ICollection<T>>> fetch) {
+            _fetch = fetch;
         }
 
+        public void Dispose() {}
+
+        public bool MoveNext() {
+            // initial load
+            if (_itemRange == null) {
+                var initialData = _fetch(null);
+                _itemRange = initialData.ItemRange;
+                _page = initialData.Data.GetEnumerator();
+                return _page.MoveNext();
+            }
+            if (_page.MoveNext())
+                return true;
+            if (_itemRange.IsComplete)
+                return false;
+            // page load
+            var nextPage = _fetch(_itemRange.Increment());
+            _itemRange = nextPage.ItemRange;
+            _page = nextPage.Data.GetEnumerator();
+            return _page.MoveNext();
+        }
+
+        public void Reset() {
+            _itemRange = null;
+            _page = null;
+        }
+
+        public T Current => _page.Current;
+
+        object IEnumerator.Current => Current;
+        
+        public IEnumerable<T> Iterate() {
+            while (MoveNext())
+                yield return Current;
+        }
     }
 
+    /// <summary>
+    /// Result pagination container
+    /// </summary>
+    public class PagedResultCollection<T> : ICollection<T>
+    {
+        private IEnumerable<T> _enumerable;
+        private ItemRange _itemRange;
+
+        public PagedResultCollection(Func<ItemRange, ApiResponse<ICollection<T>>> fetch) {
+            _enumerable = new PageEnumerator<T>(fetch).Iterate();
+        }
+
+        public PagedResultCollection(IEnumerable<T> enumerable, ItemRange itemRange) {
+            _enumerable = enumerable;
+            Count = itemRange.Total;
+            _itemRange = itemRange;
+        }
+
+        private List<T> ForceEnumerate() {
+            if (!(_enumerable is IList))
+                _enumerable = _enumerable.ToList();
+            return (List<T>) _enumerable;
+        }
+
+        public void Add(T item) {
+            ForceEnumerate().Add(item);
+        }
+
+        public void Clear() {
+            ForceEnumerate().Clear();
+        }
+
+        public bool Contains(T item) {
+            return ForceEnumerate().Contains(item);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex) {
+            ForceEnumerate().CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(T item) {
+            return ForceEnumerate().Remove(item);
+        }
+
+        public int Count { get; }
+        public bool IsReadOnly => true;
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() {
+            return _enumerable.GetEnumerator();
+        }
+
+        public IEnumerator GetEnumerator() {
+            return _enumerable.GetEnumerator();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using AlertMedia.CodeGen.Api;
 using AlertMedia.CodeGen.Client;
+using AlertMedia.CodeGen.Model;
 
 namespace AlertMedia.Client
 {
@@ -11,6 +12,9 @@ namespace AlertMedia.Client
         
         private IGroupApi _groups;
         public IGroupApi Groups => _groups ?? (_groups = new GroupApi(Configuration));
+
+        public Customer ApiCustomer;
+        public User ApiUser;
 
         public readonly Configuration Configuration;
 
@@ -28,6 +32,9 @@ namespace AlertMedia.Client
                 Username = username,
                 Password = password,
             };
+            var info = new DefaultApi(Configuration).LoginInfo();
+            ApiCustomer = info.Customer;
+            ApiUser = info.User;
         }
 
         private ApiClient GetApiClient(string address) {

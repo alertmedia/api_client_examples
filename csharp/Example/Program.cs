@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using AlertMedia.Client;
+using AlertMedia.CodeGen.Client;
 
 namespace AlertMedia.Example
 {
@@ -9,14 +12,11 @@ namespace AlertMedia.Example
 
             var client = new AlertMediaClient(
                 clientId:"00000000-0000-0000-0000-000000000000", 
-                clientSecretKey:"00000000000000000000",
-                server:"staging.alertmedia.com"
+                clientSecretKey:"00000000000000000000"
             );
-            var customerId = 99;
 
-            foreach (var user in client.Users.List(customer: customerId)) {
+            foreach (var user in client.Users.List(client.ApiCustomer.Id))
                 Console.WriteLine($"{user.FirstName} {user.LastName}");
-            }
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();

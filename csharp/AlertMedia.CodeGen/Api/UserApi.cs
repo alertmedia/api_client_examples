@@ -43,8 +43,9 @@ namespace AlertMedia.CodeGen.Api
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of User</returns>
-        ApiResponse<User> GetWithHttpInfo (long? id);
+        ApiResponse<User> GetWithHttpInfo (long? id, ItemRange itemRange=null);
         /// <summary>
         /// 
         /// </summary>
@@ -53,8 +54,8 @@ namespace AlertMedia.CodeGen.Api
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>List&lt;User&gt;</returns>
-        List<User> List (long? customer);
+        /// <returns>ICollection&lt;User&gt;</returns>
+        ICollection<User> List (long? customer);
 
         /// <summary>
         /// 
@@ -64,8 +65,9 @@ namespace AlertMedia.CodeGen.Api
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>ApiResponse of List&lt;User&gt;</returns>
-        ApiResponse<List<User>> ListWithHttpInfo (long? customer);
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of ICollection&lt;User&gt;</returns>
+        ApiResponse<ICollection<User>> ListWithHttpInfo (long? customer, ItemRange itemRange=null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -97,8 +99,8 @@ namespace AlertMedia.CodeGen.Api
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>Task of List&lt;User&gt;</returns>
-        System.Threading.Tasks.Task<List<User>> ListAsync (long? customer);
+        /// <returns>Task of ICollection&lt;User&gt;</returns>
+        System.Threading.Tasks.Task<ICollection<User>> ListAsync (long? customer);
 
         /// <summary>
         /// 
@@ -108,8 +110,8 @@ namespace AlertMedia.CodeGen.Api
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>Task of ApiResponse (List&lt;User&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<User>>> ListAsyncWithHttpInfo (long? customer);
+        /// <returns>Task of ApiResponse (ICollection&lt;User&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ICollection<User>>> ListAsyncWithHttpInfo (long? customer);
         #endregion Asynchronous Operations
     }
 
@@ -230,8 +232,7 @@ namespace AlertMedia.CodeGen.Api
         /// <returns>User</returns>
         public User Get (long? id)
         {
-             ApiResponse<User> localVarResponse = GetWithHttpInfo(id);
-             return localVarResponse.Data;
+            return GetWithHttpInfo(id).Data;
         }
 
         /// <summary>
@@ -239,8 +240,9 @@ namespace AlertMedia.CodeGen.Api
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of User</returns>
-        public ApiResponse< User > GetWithHttpInfo (long? id)
+        public ApiResponse<User> GetWithHttpInfo (long? id, ItemRange itemRange=null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -266,6 +268,8 @@ namespace AlertMedia.CodeGen.Api
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
 
             if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
 
@@ -373,11 +377,10 @@ namespace AlertMedia.CodeGen.Api
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>List&lt;User&gt;</returns>
-        public List<User> List (long? customer)
+        /// <returns>ICollection&lt;User&gt;</returns>
+        public ICollection<User> List (long? customer)
         {
-             ApiResponse<List<User>> localVarResponse = ListWithHttpInfo(customer);
-             return localVarResponse.Data;
+            return new PagedResultCollection<User>((ItemRange itemRange) => ListWithHttpInfo(customer, itemRange));
         }
 
         /// <summary>
@@ -385,8 +388,9 @@ namespace AlertMedia.CodeGen.Api
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>ApiResponse of List&lt;User&gt;</returns>
-        public ApiResponse< List<User> > ListWithHttpInfo (long? customer)
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of ICollection&lt;User&gt;</returns>
+        public ApiResponse<ICollection<User>> ListWithHttpInfo (long? customer, ItemRange itemRange=null)
         {
             // verify the required parameter 'customer' is set
             if (customer == null)
@@ -412,6 +416,8 @@ namespace AlertMedia.CodeGen.Api
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
 
             if (customer != null) localVarQueryParams.Add("customer", Configuration.ApiClient.ParameterToString(customer)); // query parameter
 
@@ -436,9 +442,9 @@ namespace AlertMedia.CodeGen.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<List<User>>(localVarStatusCode,
+            return new ApiResponse<ICollection<User>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<User>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<User>)));
+                (ICollection<User>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Collection<User>)));
         }
 
         /// <summary>
@@ -446,10 +452,10 @@ namespace AlertMedia.CodeGen.Api
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>Task of List&lt;User&gt;</returns>
-        public async System.Threading.Tasks.Task<List<User>> ListAsync (long? customer)
+        /// <returns>Task of ICollection&lt;User&gt;</returns>
+        public async System.Threading.Tasks.Task<ICollection<User>> ListAsync (long? customer)
         {
-             ApiResponse<List<User>> localVarResponse = await ListAsyncWithHttpInfo(customer);
+             ApiResponse<ICollection<User>> localVarResponse = await ListAsyncWithHttpInfo(customer);
              return localVarResponse.Data;
 
         }
@@ -459,8 +465,8 @@ namespace AlertMedia.CodeGen.Api
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customer">customer id</param>
-        /// <returns>Task of ApiResponse (List&lt;User&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<User>>> ListAsyncWithHttpInfo (long? customer)
+        /// <returns>Task of ApiResponse (ICollection&lt;User&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ICollection<User>>> ListAsyncWithHttpInfo (long? customer)
         {
             // verify the required parameter 'customer' is set
             if (customer == null)
@@ -509,9 +515,9 @@ namespace AlertMedia.CodeGen.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<List<User>>(localVarStatusCode,
+            return new ApiResponse<ICollection<User>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<User>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<User>)));
+                (ICollection<User>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Collection<User>)));
         }
 
     }

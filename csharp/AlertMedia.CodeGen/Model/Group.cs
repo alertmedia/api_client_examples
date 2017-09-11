@@ -43,7 +43,7 @@ namespace AlertMedia.CodeGen.Model
         /// <param name="Location">Location.</param>
         /// <param name="Parent">Parent.</param>
         /// <param name="Users">Users.</param>
-        public Group(long? Id = default(long?), string Name = default(string), string Description = default(string), bool? IsDefault = default(bool?), DateTime? Created = default(DateTime?), long? UsersCountWithDescendants = default(long?), long? Customer = default(long?), long? Location = default(long?), long? Parent = default(long?), List<long?> Users = default(List<long?>))
+        public Group(long? Id = default(long?), string Name = default(string), string Description = default(string), bool? IsDefault = default(bool?), DateTime? Created = default(DateTime?), long? UsersCountWithDescendants = default(long?), long? Customer = default(long?), long? Location = default(long?), long? Parent = default(long?), Collection<long?> Users = default(Collection<long?>))
         {
             this.Id = Id;
             this.Name = Name;
@@ -115,7 +115,7 @@ namespace AlertMedia.CodeGen.Model
         /// Gets or Sets Users
         /// </summary>
         [DataMember(Name="users", EmitDefaultValue=false)]
-        public List<long?> Users { get; set; }
+        public Collection<long?> Users { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using RestSharp;
 using AlertMedia.CodeGen.Client;
+using AlertMedia.CodeGen.Model;
 
 namespace AlertMedia.CodeGen.Api
 {
@@ -24,91 +25,85 @@ namespace AlertMedia.CodeGen.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Logs user into the system
+        /// Get login information
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>string</returns>
-        string LoginUser (string username, string password);
+        /// <returns>InlineResponse200</returns>
+        InlineResponse200 LoginInfo ();
 
         /// <summary>
-        /// Logs user into the system
+        /// Get login information
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> LoginUserWithHttpInfo (string username, string password);
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of InlineResponse200</returns>
+        ApiResponse<InlineResponse200> LoginInfoWithHttpInfo (ItemRange itemRange=null);
         /// <summary>
-        /// Logs out current logged in user session
+        /// Logs out current user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns></returns>
-        void LogoutUser ();
+        void Logout ();
 
         /// <summary>
-        /// Logs out current logged in user session
+        /// Logs out current user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> LogoutUserWithHttpInfo ();
+        ApiResponse<Object> LogoutWithHttpInfo (ItemRange itemRange=null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Logs user into the system
+        /// Get login information
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> LoginUserAsync (string username, string password);
+        /// <returns>Task of InlineResponse200</returns>
+        System.Threading.Tasks.Task<InlineResponse200> LoginInfoAsync ();
 
         /// <summary>
-        /// Logs user into the system
+        /// Get login information
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> LoginUserAsyncWithHttpInfo (string username, string password);
+        /// <returns>Task of ApiResponse (InlineResponse200)</returns>
+        System.Threading.Tasks.Task<ApiResponse<InlineResponse200>> LoginInfoAsyncWithHttpInfo ();
         /// <summary>
-        /// Logs out current logged in user session
+        /// Logs out current user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task LogoutUserAsync ();
+        System.Threading.Tasks.Task LogoutAsync ();
 
         /// <summary>
-        /// Logs out current logged in user session
+        /// Logs out current user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> LogoutUserAsyncWithHttpInfo ();
+        System.Threading.Tasks.Task<ApiResponse<Object>> LogoutAsyncWithHttpInfo ();
         #endregion Asynchronous Operations
     }
 
@@ -222,33 +217,23 @@ namespace AlertMedia.CodeGen.Api
         }
 
         /// <summary>
-        /// Logs user into the system 
+        /// Get login information 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>string</returns>
-        public string LoginUser (string username, string password)
+        /// <returns>InlineResponse200</returns>
+        public InlineResponse200 LoginInfo ()
         {
-             ApiResponse<string> localVarResponse = LoginUserWithHttpInfo(username, password);
-             return localVarResponse.Data;
+            return LoginInfoWithHttpInfo().Data;
         }
 
         /// <summary>
-        /// Logs user into the system 
+        /// Get login information 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > LoginUserWithHttpInfo (string username, string password)
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of InlineResponse200</returns>
+        public ApiResponse<InlineResponse200> LoginInfoWithHttpInfo (ItemRange itemRange=null)
         {
-            // verify the required parameter 'username' is set
-            if (username == null)
-                throw new ApiException(400, "Missing required parameter 'username' when calling DefaultApi->LoginUser");
-            // verify the required parameter 'password' is set
-            if (password == null)
-                throw new ApiException(400, "Missing required parameter 'password' when calling DefaultApi->LoginUser");
 
             var localVarPath = "/v2/login";
             var localVarPathParams = new Dictionary<String, String>();
@@ -270,9 +255,9 @@ namespace AlertMedia.CodeGen.Api
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
 
-            if (username != null) localVarQueryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
-            if (password != null) localVarQueryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -291,44 +276,34 @@ namespace AlertMedia.CodeGen.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LoginUser", localVarResponse);
+                Exception exception = ExceptionFactory("LoginInfo", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<string>(localVarStatusCode,
+            return new ApiResponse<InlineResponse200>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+                (InlineResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse200)));
         }
 
         /// <summary>
-        /// Logs user into the system 
+        /// Get login information 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> LoginUserAsync (string username, string password)
+        /// <returns>Task of InlineResponse200</returns>
+        public async System.Threading.Tasks.Task<InlineResponse200> LoginInfoAsync ()
         {
-             ApiResponse<string> localVarResponse = await LoginUserAsyncWithHttpInfo(username, password);
+             ApiResponse<InlineResponse200> localVarResponse = await LoginInfoAsyncWithHttpInfo();
              return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Logs user into the system 
+        /// Get login information 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="username">The user name for login</param>
-        /// <param name="password">The password for login in clear text</param>
-        /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> LoginUserAsyncWithHttpInfo (string username, string password)
+        /// <returns>Task of ApiResponse (InlineResponse200)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<InlineResponse200>> LoginInfoAsyncWithHttpInfo ()
         {
-            // verify the required parameter 'username' is set
-            if (username == null)
-                throw new ApiException(400, "Missing required parameter 'username' when calling DefaultApi->LoginUser");
-            // verify the required parameter 'password' is set
-            if (password == null)
-                throw new ApiException(400, "Missing required parameter 'password' when calling DefaultApi->LoginUser");
 
             var localVarPath = "/v2/login";
             var localVarPathParams = new Dictionary<String, String>();
@@ -351,8 +326,6 @@ namespace AlertMedia.CodeGen.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (username != null) localVarQueryParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // query parameter
-            if (password != null) localVarQueryParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // query parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -370,31 +343,32 @@ namespace AlertMedia.CodeGen.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LoginUser", localVarResponse);
+                Exception exception = ExceptionFactory("LoginInfo", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<string>(localVarStatusCode,
+            return new ApiResponse<InlineResponse200>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+                (InlineResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse200)));
         }
 
         /// <summary>
-        /// Logs out current logged in user session 
+        /// Logs out current user 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns></returns>
-        public void LogoutUser ()
+        public void Logout ()
         {
-             LogoutUserWithHttpInfo();
+            LogoutWithHttpInfo();
         }
 
         /// <summary>
-        /// Logs out current logged in user session 
+        /// Logs out current user 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> LogoutUserWithHttpInfo ()
+        public ApiResponse<Object> LogoutWithHttpInfo (ItemRange itemRange=null)
         {
 
             var localVarPath = "/logout";
@@ -417,6 +391,8 @@ namespace AlertMedia.CodeGen.Api
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
 
 
             // authentication (basicAuth) required
@@ -436,7 +412,7 @@ namespace AlertMedia.CodeGen.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LogoutUser", localVarResponse);
+                Exception exception = ExceptionFactory("Logout", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -446,22 +422,22 @@ namespace AlertMedia.CodeGen.Api
         }
 
         /// <summary>
-        /// Logs out current logged in user session 
+        /// Logs out current user 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task LogoutUserAsync ()
+        public async System.Threading.Tasks.Task LogoutAsync ()
         {
-             await LogoutUserAsyncWithHttpInfo();
+             await LogoutAsyncWithHttpInfo();
 
         }
 
         /// <summary>
-        /// Logs out current logged in user session 
+        /// Logs out current user 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> LogoutUserAsyncWithHttpInfo ()
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> LogoutAsyncWithHttpInfo ()
         {
 
             var localVarPath = "/logout";
@@ -502,7 +478,7 @@ namespace AlertMedia.CodeGen.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LogoutUser", localVarResponse);
+                Exception exception = ExceptionFactory("Logout", localVarResponse);
                 if (exception != null) throw exception;
             }
 
