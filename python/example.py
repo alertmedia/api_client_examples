@@ -21,7 +21,7 @@ def main():
         while not done:
             result = alertmedia_client.user.list(start=start, end=end)
             users_list.extend(result.data)
-            total = result.item_range.get('total', None)
+            total = result.item_range.total
             if total is None or total <= end:
                 done = True
                 continue
