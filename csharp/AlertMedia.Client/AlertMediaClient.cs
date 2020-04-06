@@ -19,6 +19,7 @@ namespace AlertMedia.Client
         public readonly Configuration Configuration;
 
         public AlertMediaClient(string clientId = null, string clientSecretKey = null, string server = null) {
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
             var username = clientId ?? Environment.GetEnvironmentVariable("AM_CLIENT_ID");
             if (username == null)
                 throw new ArgumentNullException(nameof(clientId), "You must specify an AlertMedia API clientId and clientSecretKey.");
