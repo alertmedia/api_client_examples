@@ -25,15 +25,59 @@ namespace AlertMedia.CodeGen.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user">User object to created</param>
+        /// <returns>User</returns>
+        User Create (User user);
+
+        /// <summary>
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user">User object to created</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> CreateWithHttpInfo (User user, ItemRange itemRange=null);
+        /// <summary>
+        /// Deletes a User for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns></returns>
+        void Delete (long? userId);
+
+        /// <summary>
+        /// Deletes a User for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteWithHttpInfo (long? userId, ItemRange itemRange=null);
+        /// <summary>
         /// 
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="userId">user id</param>
         /// <returns>User</returns>
-        User Get (long? id);
+        User Get (long? userId);
 
         /// <summary>
         /// 
@@ -42,10 +86,10 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="userId">user id</param>
         /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of User</returns>
-        ApiResponse<User> GetWithHttpInfo (long? id, ItemRange itemRange=null);
+        ApiResponse<User> GetWithHttpInfo (long? userId, ItemRange itemRange=null);
         /// <summary>
         /// 
         /// </summary>
@@ -92,8 +136,96 @@ namespace AlertMedia.CodeGen.Api
         /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> SetPhotoWithHttpInfo (long? userId, System.IO.Stream photo, ItemRange itemRange=null);
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns></returns>
+        void Undelete (long? userId);
+
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> UndeleteWithHttpInfo (long? userId, ItemRange itemRange=null);
+        /// <summary>
+        /// Update a user. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <returns>User</returns>
+        User Update (long? userId, User user);
+
+        /// <summary>
+        /// Update a user. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> UpdateWithHttpInfo (long? userId, User user, ItemRange itemRange=null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user">User object to created</param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> CreateAsync (User user);
+
+        /// <summary>
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user">User object to created</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> CreateAsyncWithHttpInfo (User user);
+        /// <summary>
+        /// Deletes a User for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteAsync (long? userId);
+
+        /// <summary>
+        /// Deletes a User for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? userId);
         /// <summary>
         /// 
         /// </summary>
@@ -101,9 +233,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="userId">user id</param>
         /// <returns>Task of User</returns>
-        System.Threading.Tasks.Task<User> GetAsync (long? id);
+        System.Threading.Tasks.Task<User> GetAsync (long? userId);
 
         /// <summary>
         /// 
@@ -112,9 +244,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="userId">user id</param>
         /// <returns>Task of ApiResponse (User)</returns>
-        System.Threading.Tasks.Task<ApiResponse<User>> GetAsyncWithHttpInfo (long? id);
+        System.Threading.Tasks.Task<ApiResponse<User>> GetAsyncWithHttpInfo (long? userId);
         /// <summary>
         /// 
         /// </summary>
@@ -159,6 +291,50 @@ namespace AlertMedia.CodeGen.Api
         /// <param name="photo">The file to upload.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> SetPhotoAsyncWithHttpInfo (long? userId, System.IO.Stream photo);
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task UndeleteAsync (long? userId);
+
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> UndeleteAsyncWithHttpInfo (long? userId);
+        /// <summary>
+        /// Update a user. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> UpdateAsync (long? userId, User user);
+
+        /// <summary>
+        /// Update a user. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> UpdateAsyncWithHttpInfo (long? userId, User user);
         #endregion Asynchronous Operations
     }
 
@@ -272,30 +448,194 @@ namespace AlertMedia.CodeGen.Api
         }
 
         /// <summary>
-        ///  
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="user">User object to created</param>
         /// <returns>User</returns>
-        public User Get (long? id)
+        public User Create (User user)
         {
-            return GetWithHttpInfo(id).Data;
+            return CreateWithHttpInfo(user).Data;
         }
 
         /// <summary>
-        ///  
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="user">User object to created</param>
         /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of User</returns>
-        public ApiResponse<User> GetWithHttpInfo (long? id, ItemRange itemRange=null)
+        public ApiResponse<User> CreateWithHttpInfo (User user, ItemRange itemRange=null)
         {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling UserApi->Get");
+            // verify the required parameter 'user' is set
+            if (user == null)
+                throw new ApiException(400, "Missing required parameter 'user' when calling UserApi->Create");
 
-            var localVarPath = "/users/{id}";
+            var localVarPath = "/users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (user != null && user.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(user); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = user; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Create", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<User>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
+        }
+
+        /// <summary>
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user">User object to created</param>
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> CreateAsync (User user)
+        {
+             ApiResponse<User> localVarResponse = await CreateAsyncWithHttpInfo(user);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Create a user. Need at least first_name, last_name and either email or mobile_phone 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user">User object to created</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<User>> CreateAsyncWithHttpInfo (User user)
+        {
+            // verify the required parameter 'user' is set
+            if (user == null)
+                throw new ApiException(400, "Missing required parameter 'user' when calling UserApi->Create");
+
+            var localVarPath = "/users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (user != null && user.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(user); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = user; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Create", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<User>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
+        }
+
+        /// <summary>
+        /// Deletes a User for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns></returns>
+        public void Delete (long? userId)
+        {
+            DeleteWithHttpInfo(userId);
+        }
+
+        /// <summary>
+        /// Deletes a User for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteWithHttpInfo (long? userId, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Delete");
+
+            var localVarPath = "/users/{userId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -318,7 +658,154 @@ namespace AlertMedia.CodeGen.Api
             if (itemRange != null)
                 localVarHeaderParams.Add("Range", itemRange.ToHeader());
 
-            if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Deletes a User for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteAsync (long? userId)
+        {
+             await DeleteAsyncWithHttpInfo(userId);
+
+        }
+
+        /// <summary>
+        /// Deletes a User for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? userId)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Delete");
+
+            var localVarPath = "/users/{userId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>User</returns>
+        public User Get (long? userId)
+        {
+            return GetWithHttpInfo(userId).Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of User</returns>
+        public ApiResponse<User> GetWithHttpInfo (long? userId, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Get");
+
+            var localVarPath = "/users/{userId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -350,11 +837,11 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="userId">user id</param>
         /// <returns>Task of User</returns>
-        public async System.Threading.Tasks.Task<User> GetAsync (long? id)
+        public async System.Threading.Tasks.Task<User> GetAsync (long? userId)
         {
-             ApiResponse<User> localVarResponse = await GetAsyncWithHttpInfo(id);
+             ApiResponse<User> localVarResponse = await GetAsyncWithHttpInfo(userId);
              return localVarResponse.Data;
 
         }
@@ -363,15 +850,15 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">user id</param>
+        /// <param name="userId">user id</param>
         /// <returns>Task of ApiResponse (User)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<User>> GetAsyncWithHttpInfo (long? id)
+        public async System.Threading.Tasks.Task<ApiResponse<User>> GetAsyncWithHttpInfo (long? userId)
         {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling UserApi->Get");
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Get");
 
-            var localVarPath = "/users/{id}";
+            var localVarPath = "/users/{userId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -392,7 +879,7 @@ namespace AlertMedia.CodeGen.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -726,6 +1213,329 @@ namespace AlertMedia.CodeGen.Api
             return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
+        }
+
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns></returns>
+        public void Undelete (long? userId)
+        {
+            UndeleteWithHttpInfo(userId);
+        }
+
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> UndeleteWithHttpInfo (long? userId, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Undelete");
+
+            var localVarPath = "/users/{userId}/deleted";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Undelete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task UndeleteAsync (long? userId)
+        {
+             await UndeleteAsyncWithHttpInfo(userId);
+
+        }
+
+        /// <summary>
+        /// Undeletes (Restores) a deleted user for a given User ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> UndeleteAsyncWithHttpInfo (long? userId)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Undelete");
+
+            var localVarPath = "/users/{userId}/deleted";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Undelete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Update a user. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <returns>User</returns>
+        public User Update (long? userId, User user)
+        {
+            return UpdateWithHttpInfo(userId, user).Data;
+        }
+
+        /// <summary>
+        /// Update a user. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of User</returns>
+        public ApiResponse<User> UpdateWithHttpInfo (long? userId, User user, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Update");
+            // verify the required parameter 'user' is set
+            if (user == null)
+                throw new ApiException(400, "Missing required parameter 'user' when calling UserApi->Update");
+
+            var localVarPath = "/users/{userId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
+            if (user != null && user.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(user); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = user; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<User>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
+        }
+
+        /// <summary>
+        /// Update a user. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> UpdateAsync (long? userId, User user)
+        {
+             ApiResponse<User> localVarResponse = await UpdateAsyncWithHttpInfo(userId, user);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update a user. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">user id</param>
+        /// <param name="user">User object with updated data</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<User>> UpdateAsyncWithHttpInfo (long? userId, User user)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UserApi->Update");
+            // verify the required parameter 'user' is set
+            if (user == null)
+                throw new ApiException(400, "Missing required parameter 'user' when calling UserApi->Update");
+
+            var localVarPath = "/users/{userId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (userId != null) localVarPathParams.Add("userId", Configuration.ApiClient.ParameterToString(userId)); // path parameter
+            if (user != null && user.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(user); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = user; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<User>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
         }
 
     }
