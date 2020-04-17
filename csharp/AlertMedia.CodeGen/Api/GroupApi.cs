@@ -25,15 +25,83 @@ namespace AlertMedia.CodeGen.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Add users to a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <returns>InlineResponse2001</returns>
+        InlineResponse2001 AddUsers (long? groupId, Collection<long?> ids = null);
+
+        /// <summary>
+        /// Add users to a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        ApiResponse<InlineResponse2001> AddUsersWithHttpInfo (long? groupId, Collection<long?> ids = null, ItemRange itemRange=null);
+        /// <summary>
+        /// Create a Group. Need at least a Name
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
+        /// <returns>Group</returns>
+        Group Create (Group group);
+
+        /// <summary>
+        /// Create a Group. Need at least a Name
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Group</returns>
+        ApiResponse<Group> CreateWithHttpInfo (Group group, ItemRange itemRange=null);
+        /// <summary>
+        /// Deletes a Group for a given Group ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <returns></returns>
+        void Delete (long? groupId);
+
+        /// <summary>
+        /// Deletes a Group for a given Group ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteWithHttpInfo (long? groupId, ItemRange itemRange=null);
+        /// <summary>
         /// 
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
+        /// <param name="groupId">group id</param>
         /// <returns>Group</returns>
-        Group Get (long? id);
+        Group Get (long? groupId);
 
         /// <summary>
         /// 
@@ -42,10 +110,10 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
+        /// <param name="groupId">group id</param>
         /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of Group</returns>
-        ApiResponse<Group> GetWithHttpInfo (long? id, ItemRange itemRange=null);
+        ApiResponse<Group> GetWithHttpInfo (long? groupId, ItemRange itemRange=null);
         /// <summary>
         /// 
         /// </summary>
@@ -68,8 +136,121 @@ namespace AlertMedia.CodeGen.Api
         /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of ICollection&lt;Group&gt;</returns>
         ApiResponse<ICollection<Group>> ListWithHttpInfo (long? customer, ItemRange itemRange=null);
+        /// <summary>
+        /// Remove users from a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <returns>InlineResponse2001</returns>
+        InlineResponse2001 RemoveUsers (long? groupId, Collection<long?> id);
+
+        /// <summary>
+        /// Remove users from a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        ApiResponse<InlineResponse2001> RemoveUsersWithHttpInfo (long? groupId, Collection<long?> id, ItemRange itemRange=null);
+        /// <summary>
+        /// Update a group. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <returns>Group</returns>
+        Group Update (long? groupId, Group group);
+
+        /// <summary>
+        /// Update a group. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Group</returns>
+        ApiResponse<Group> UpdateWithHttpInfo (long? groupId, Group group, ItemRange itemRange=null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// Add users to a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <returns>Task of InlineResponse2001</returns>
+        System.Threading.Tasks.Task<InlineResponse2001> AddUsersAsync (long? groupId, Collection<long?> ids = null);
+
+        /// <summary>
+        /// Add users to a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <returns>Task of ApiResponse (InlineResponse2001)</returns>
+        System.Threading.Tasks.Task<ApiResponse<InlineResponse2001>> AddUsersAsyncWithHttpInfo (long? groupId, Collection<long?> ids = null);
+        /// <summary>
+        /// Create a Group. Need at least a Name
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
+        /// <returns>Task of Group</returns>
+        System.Threading.Tasks.Task<Group> CreateAsync (Group group);
+
+        /// <summary>
+        /// Create a Group. Need at least a Name
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
+        /// <returns>Task of ApiResponse (Group)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Group>> CreateAsyncWithHttpInfo (Group group);
+        /// <summary>
+        /// Deletes a Group for a given Group ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteAsync (long? groupId);
+
+        /// <summary>
+        /// Deletes a Group for a given Group ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? groupId);
         /// <summary>
         /// 
         /// </summary>
@@ -77,9 +258,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
+        /// <param name="groupId">group id</param>
         /// <returns>Task of Group</returns>
-        System.Threading.Tasks.Task<Group> GetAsync (long? id);
+        System.Threading.Tasks.Task<Group> GetAsync (long? groupId);
 
         /// <summary>
         /// 
@@ -88,9 +269,9 @@ namespace AlertMedia.CodeGen.Api
         /// 
         /// </remarks>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
+        /// <param name="groupId">group id</param>
         /// <returns>Task of ApiResponse (Group)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Group>> GetAsyncWithHttpInfo (long? id);
+        System.Threading.Tasks.Task<ApiResponse<Group>> GetAsyncWithHttpInfo (long? groupId);
         /// <summary>
         /// 
         /// </summary>
@@ -112,6 +293,52 @@ namespace AlertMedia.CodeGen.Api
         /// <param name="customer">customer id</param>
         /// <returns>Task of ApiResponse (ICollection&lt;Group&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<ICollection<Group>>> ListAsyncWithHttpInfo (long? customer);
+        /// <summary>
+        /// Remove users from a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <returns>Task of InlineResponse2001</returns>
+        System.Threading.Tasks.Task<InlineResponse2001> RemoveUsersAsync (long? groupId, Collection<long?> id);
+
+        /// <summary>
+        /// Remove users from a group
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <returns>Task of ApiResponse (InlineResponse2001)</returns>
+        System.Threading.Tasks.Task<ApiResponse<InlineResponse2001>> RemoveUsersAsyncWithHttpInfo (long? groupId, Collection<long?> id);
+        /// <summary>
+        /// Update a group. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <returns>Task of Group</returns>
+        System.Threading.Tasks.Task<Group> UpdateAsync (long? groupId, Group group);
+
+        /// <summary>
+        /// Update a group. Can use a subset of fields.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <returns>Task of ApiResponse (Group)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Group>> UpdateAsyncWithHttpInfo (long? groupId, Group group);
         #endregion Asynchronous Operations
     }
 
@@ -225,30 +452,364 @@ namespace AlertMedia.CodeGen.Api
         }
 
         /// <summary>
-        ///  
+        /// Add users to a group 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
-        /// <returns>Group</returns>
-        public Group Get (long? id)
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <returns>InlineResponse2001</returns>
+        public InlineResponse2001 AddUsers (long? groupId, Collection<long?> ids = null)
         {
-            return GetWithHttpInfo(id).Data;
+            return AddUsersWithHttpInfo(groupId, ids).Data;
         }
 
         /// <summary>
-        ///  
+        /// Add users to a group 
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        public ApiResponse<InlineResponse2001> AddUsersWithHttpInfo (long? groupId, Collection<long?> ids = null, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->AddUsers");
+
+            var localVarPath = "v2/groups/{groupId}/users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+            if (ids != null && ids.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(ids); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = ids; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("AddUsers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2001>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2001) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001)));
+        }
+
+        /// <summary>
+        /// Add users to a group 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <returns>Task of InlineResponse2001</returns>
+        public async System.Threading.Tasks.Task<InlineResponse2001> AddUsersAsync (long? groupId, Collection<long?> ids = null)
+        {
+             ApiResponse<InlineResponse2001> localVarResponse = await AddUsersAsyncWithHttpInfo(groupId, ids);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Add users to a group 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to add users to</param>
+        /// <param name="ids">List of alertmedia user id(s) to add to the group (optional)</param>
+        /// <returns>Task of ApiResponse (InlineResponse2001)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<InlineResponse2001>> AddUsersAsyncWithHttpInfo (long? groupId, Collection<long?> ids = null)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->AddUsers");
+
+            var localVarPath = "v2/groups/{groupId}/users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+            if (ids != null && ids.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(ids); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = ids; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("AddUsers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2001>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2001) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001)));
+        }
+
+        /// <summary>
+        /// Create a Group. Need at least a Name 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
+        /// <returns>Group</returns>
+        public Group Create (Group group)
+        {
+            return CreateWithHttpInfo(group).Data;
+        }
+
+        /// <summary>
+        /// Create a Group. Need at least a Name 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
         /// <param name="itemRange">item-range pagination</param>
         /// <returns>ApiResponse of Group</returns>
-        public ApiResponse<Group> GetWithHttpInfo (long? id, ItemRange itemRange=null)
+        public ApiResponse<Group> CreateWithHttpInfo (Group group, ItemRange itemRange=null)
         {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling GroupApi->Get");
+            // verify the required parameter 'group' is set
+            if (group == null)
+                throw new ApiException(400, "Missing required parameter 'group' when calling GroupApi->Create");
 
-            var localVarPath = "/groups/{id}";
+            var localVarPath = "v2/groups";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (group != null && group.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(group); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = group; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Create", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Group>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Group) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Group)));
+        }
+
+        /// <summary>
+        /// Create a Group. Need at least a Name 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
+        /// <returns>Task of Group</returns>
+        public async System.Threading.Tasks.Task<Group> CreateAsync (Group group)
+        {
+             ApiResponse<Group> localVarResponse = await CreateAsyncWithHttpInfo(group);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Create a Group. Need at least a Name 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="group">Group object to created</param>
+        /// <returns>Task of ApiResponse (Group)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Group>> CreateAsyncWithHttpInfo (Group group)
+        {
+            // verify the required parameter 'group' is set
+            if (group == null)
+                throw new ApiException(400, "Missing required parameter 'group' when calling GroupApi->Create");
+
+            var localVarPath = "v2/groups";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (group != null && group.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(group); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = group; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Create", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Group>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Group) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Group)));
+        }
+
+        /// <summary>
+        /// Deletes a Group for a given Group ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <returns></returns>
+        public void Delete (long? groupId)
+        {
+            DeleteWithHttpInfo(groupId);
+        }
+
+        /// <summary>
+        /// Deletes a Group for a given Group ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteWithHttpInfo (long? groupId, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->Delete");
+
+            var localVarPath = "v2/groups/{groupId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -271,7 +832,154 @@ namespace AlertMedia.CodeGen.Api
             if (itemRange != null)
                 localVarHeaderParams.Add("Range", itemRange.ToHeader());
 
-            if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Deletes a Group for a given Group ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteAsync (long? groupId)
+        {
+             await DeleteAsyncWithHttpInfo(groupId);
+
+        }
+
+        /// <summary>
+        /// Deletes a Group for a given Group ID. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">user id</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? groupId)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->Delete");
+
+            var localVarPath = "v2/groups/{groupId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <returns>Group</returns>
+        public Group Get (long? groupId)
+        {
+            return GetWithHttpInfo(groupId).Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Group</returns>
+        public ApiResponse<Group> GetWithHttpInfo (long? groupId, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->Get");
+
+            var localVarPath = "v2/groups/{groupId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -303,11 +1011,11 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
+        /// <param name="groupId">group id</param>
         /// <returns>Task of Group</returns>
-        public async System.Threading.Tasks.Task<Group> GetAsync (long? id)
+        public async System.Threading.Tasks.Task<Group> GetAsync (long? groupId)
         {
-             ApiResponse<Group> localVarResponse = await GetAsyncWithHttpInfo(id);
+             ApiResponse<Group> localVarResponse = await GetAsyncWithHttpInfo(groupId);
              return localVarResponse.Data;
 
         }
@@ -316,15 +1024,15 @@ namespace AlertMedia.CodeGen.Api
         ///  
         /// </summary>
         /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">group id</param>
+        /// <param name="groupId">group id</param>
         /// <returns>Task of ApiResponse (Group)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Group>> GetAsyncWithHttpInfo (long? id)
+        public async System.Threading.Tasks.Task<ApiResponse<Group>> GetAsyncWithHttpInfo (long? groupId)
         {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling GroupApi->Get");
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->Get");
 
-            var localVarPath = "/groups/{id}";
+            var localVarPath = "v2/groups/{groupId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -345,7 +1053,7 @@ namespace AlertMedia.CodeGen.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -396,7 +1104,7 @@ namespace AlertMedia.CodeGen.Api
             if (customer == null)
                 throw new ApiException(400, "Missing required parameter 'customer' when calling GroupApi->List");
 
-            var localVarPath = "/groups";
+            var localVarPath = "v2/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -472,7 +1180,7 @@ namespace AlertMedia.CodeGen.Api
             if (customer == null)
                 throw new ApiException(400, "Missing required parameter 'customer' when calling GroupApi->List");
 
-            var localVarPath = "/groups";
+            var localVarPath = "v2/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -518,6 +1226,342 @@ namespace AlertMedia.CodeGen.Api
             return new ApiResponse<ICollection<Group>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (ICollection<Group>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Collection<Group>)));
+        }
+
+        /// <summary>
+        /// Remove users from a group 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <returns>InlineResponse2001</returns>
+        public InlineResponse2001 RemoveUsers (long? groupId, Collection<long?> id)
+        {
+            return RemoveUsersWithHttpInfo(groupId, id).Data;
+        }
+
+        /// <summary>
+        /// Remove users from a group 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        public ApiResponse<InlineResponse2001> RemoveUsersWithHttpInfo (long? groupId, Collection<long?> id, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->RemoveUsers");
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling GroupApi->RemoveUsers");
+
+            var localVarPath = "v2/groups/{groupId}/users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+            if (id != null) localVarQueryParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // query parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("RemoveUsers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2001>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2001) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001)));
+        }
+
+        /// <summary>
+        /// Remove users from a group 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <returns>Task of InlineResponse2001</returns>
+        public async System.Threading.Tasks.Task<InlineResponse2001> RemoveUsersAsync (long? groupId, Collection<long?> id)
+        {
+             ApiResponse<InlineResponse2001> localVarResponse = await RemoveUsersAsyncWithHttpInfo(groupId, id);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Remove users from a group 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">id of group to remove users from</param>
+        /// <param name="id">list of user ids to remove from group</param>
+        /// <returns>Task of ApiResponse (InlineResponse2001)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<InlineResponse2001>> RemoveUsersAsyncWithHttpInfo (long? groupId, Collection<long?> id)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->RemoveUsers");
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling GroupApi->RemoveUsers");
+
+            var localVarPath = "v2/groups/{groupId}/users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+            if (id != null) localVarQueryParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // query parameter
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("RemoveUsers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2001>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2001) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001)));
+        }
+
+        /// <summary>
+        /// Update a group. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <returns>Group</returns>
+        public Group Update (long? groupId, Group group)
+        {
+            return UpdateWithHttpInfo(groupId, group).Data;
+        }
+
+        /// <summary>
+        /// Update a group. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <param name="itemRange">item-range pagination</param>
+        /// <returns>ApiResponse of Group</returns>
+        public ApiResponse<Group> UpdateWithHttpInfo (long? groupId, Group group, ItemRange itemRange=null)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->Update");
+            // verify the required parameter 'group' is set
+            if (group == null)
+                throw new ApiException(400, "Missing required parameter 'group' when calling GroupApi->Update");
+
+            var localVarPath = "v2/groups/{groupId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (itemRange != null)
+                localVarHeaderParams.Add("Range", itemRange.ToHeader());
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+            if (group != null && group.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(group); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = group; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Group>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Group) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Group)));
+        }
+
+        /// <summary>
+        /// Update a group. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <returns>Task of Group</returns>
+        public async System.Threading.Tasks.Task<Group> UpdateAsync (long? groupId, Group group)
+        {
+             ApiResponse<Group> localVarResponse = await UpdateAsyncWithHttpInfo(groupId, group);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update a group. Can use a subset of fields. 
+        /// </summary>
+        /// <exception cref="AlertMedia.CodeGen.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="groupId">group id</param>
+        /// <param name="group">Group object with updated data</param>
+        /// <returns>Task of ApiResponse (Group)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Group>> UpdateAsyncWithHttpInfo (long? groupId, Group group)
+        {
+            // verify the required parameter 'groupId' is set
+            if (groupId == null)
+                throw new ApiException(400, "Missing required parameter 'groupId' when calling GroupApi->Update");
+            // verify the required parameter 'group' is set
+            if (group == null)
+                throw new ApiException(400, "Missing required parameter 'group' when calling GroupApi->Update");
+
+            var localVarPath = "v2/groups/{groupId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (groupId != null) localVarPathParams.Add("groupId", Configuration.ApiClient.ParameterToString(groupId)); // path parameter
+            if (group != null && group.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = Configuration.ApiClient.Serialize(group); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = group; // byte array
+            }
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(Configuration.Username) || !String.IsNullOrEmpty(Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(Configuration.Username + ":" + Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Group>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Group) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Group)));
         }
 
     }
